@@ -12,7 +12,8 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource{
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = reminderTableView.dequeueReusableCell(withIdentifier: "reminderCell", for: indexPath) as? CustomReminderCell else {fatalError() }
-    let reminder = reminders[indexPath.item]
+
+    let reminder = reminders[indexPath.row]
 
     cell.reminderLabel.textAlignment = .left
     cell.reminderLabel.text = reminder.title
@@ -37,4 +38,41 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource{
     cell.cellView.layer.cornerRadius = 20
     return cell
   }
+
+  func addDefaultReminders(){
+    if DatabaseHelper.shared.isEmpty(){
+      let alert = UIAlertController(title: "Hey..!", message: "Do you want to proceed with default Reminders?", preferredStyle: .alert)
+      let ok = UIAlertAction(title: "Ok", style: .default,handler: {
+        action in
+        self.reminders = Reminder.sampleData
+        for reminder in self.reminders {
+          DatabaseHelper.shared.saveReminder(reminder: reminder)
+        }
+        self.reminderTableView.reloadData()
+      } )
+      let cancel = UIAlertAction(title: "Cancel", style: .default)
+      alert.addAction(cancel)
+      alert.addAction(ok)
+      present(alert, animated: true)
+    }
+    else {
+      let storedReminders = DatabaseHelper.shared.getStoredReminders()
+      for reminder in storedReminders {
+        reminders.append(reminder)
+      }
+    }
+  }
+
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let delete = UIContextualAction(style: .destructive, title: "Delete", handler:{ _,_,_ in
+      DatabaseHelper.shared.deleteReminder(reminder: self.reminders[indexPath.row])
+      self.reminders.remove(at: indexPath.row)
+      self.reminderTableView.deleteRows(at: [indexPath], with: .fade)
+      self.reminderTableView.reloadData()
+    })
+    let configuration = UISwipeActionsConfiguration(actions: [delete])
+    return configuration
+  }
 }
+
+

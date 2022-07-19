@@ -19,6 +19,7 @@
 		5732528528819B7000540003 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732528428819B7000540003 /* Reminder.swift */; };
 		5732528728819BAC00540003 /* Date+Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732528628819BAC00540003 /* Date+Today.swift */; };
 		5732528A28819C6300540003 /* ReminderViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732528928819C6300540003 /* ReminderViewController+DataSource.swift */; };
+		576806B12886962B00E311B1 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576806B02886962B00E311B1 /* DatabaseHelper.swift */; };
 		57AEC0E128828A2500E72F95 /* CustomReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AEC0E028828A2500E72F95 /* CustomReminderCell.swift */; };
 		64290548EFC8B8FD07069A7F /* Pods_ReminderTable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32036AC6C253F1F36788E846 /* Pods_ReminderTable.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		5732528428819B7000540003 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		5732528628819BAC00540003 /* Date+Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Today.swift"; sourceTree = "<group>"; };
 		5732528928819C6300540003 /* ReminderViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderViewController+DataSource.swift"; sourceTree = "<group>"; };
+		576806B02886962B00E311B1 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		57AEC0E028828A2500E72F95 /* CustomReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReminderCell.swift; sourceTree = "<group>"; };
 		A4504BE6496525EB83F5A133 /* Pods-ReminderTable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReminderTable.release.xcconfig"; path = "Target Support Files/Pods-ReminderTable/Pods-ReminderTable.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +97,6 @@
 				368F4F591E9B199025688BA7 /* Pods-ReminderTable.debug.xcconfig */,
 				A4504BE6496525EB83F5A133 /* Pods-ReminderTable.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -133,6 +134,7 @@
 				5732525E2881992C00540003 /* LaunchScreen.storyboard */,
 				573252612881992C00540003 /* Info.plist */,
 				57AEC0E028828A2500E72F95 /* CustomReminderCell.swift */,
+				576806B02886962B00E311B1 /* DatabaseHelper.swift */,
 			);
 			path = ReminderTable;
 			sourceTree = "<group>";
@@ -359,6 +361,7 @@
 				5732528728819BAC00540003 /* Date+Today.swift in Sources */,
 				573252542881992B00540003 /* AppDelegate.swift in Sources */,
 				5732528A28819C6300540003 /* ReminderViewController+DataSource.swift in Sources */,
+				576806B12886962B00E311B1 /* DatabaseHelper.swift in Sources */,
 				57AEC0E128828A2500E72F95 /* CustomReminderCell.swift in Sources */,
 				573252562881992B00540003 /* SceneDelegate.swift in Sources */,
 				5732528528819B7000540003 /* Reminder.swift in Sources */,
