@@ -5,14 +5,20 @@
 //  Created by Vasanth Gentela on 15/07/22.
 //
 import Foundation
+import RealmSwift
 
-struct Reminder{
+class Reminder{
   var title:String
   var dueDate:Date
   var notes:String?
   var isComplete:Bool = false
   var image:String
-
+  init(title:String,dueDate:Date,notes:String?,isComplete:Bool){
+    self.title = title
+    self.dueDate = dueDate
+    self.notes = notes
+    self.isComplete = isComplete
+  }
 }
 #if DEBUG
 extension Reminder{
