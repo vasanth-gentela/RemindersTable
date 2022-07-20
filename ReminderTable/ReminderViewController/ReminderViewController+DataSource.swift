@@ -8,7 +8,15 @@
 import Foundation
 import UIKit
 
-extension ReminderViewController: UITableViewDelegate, UITableViewDataSource{
+extension ReminderViewController: UITableViewDelegate, UITableViewDataSource,UITableViewDataSourcePrefetching{
+
+  func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+    print("prefetched rows")
+  }
+  func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+    print("cancelled prefetched rows")
+  }
+
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = reminderTableView.dequeueReusableCell(withIdentifier: "reminderCell", for: indexPath) as? CustomReminderCell else {fatalError() }
@@ -45,8 +53,11 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource{
       let ok = UIAlertAction(title: "Ok", style: .default,handler: {
         action in
         self.reminders = Reminder.sampleData
-        for reminder in self.reminders {
-          DatabaseHelper.shared.saveReminder(reminder: reminder)
+        for rem in self.reminders { DatabaseHelper.shared.saveReminder(reminder: rem) }
+        for _ in Range(1...10000){
+          let rem = Reminder(title: "new Reminder", dueDate: Date().addingTimeInterval(TimeInterval(Int.random(in: 1...1000))))
+          self.reminders.append(rem)
+          DatabaseHelper.shared.saveReminder(reminder: rem)
         }
         self.reminderTableView.reloadData()
       } )
@@ -57,9 +68,7 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource{
     }
     else {
       let storedReminders = DatabaseHelper.shared.getStoredReminders()
-      for reminder in storedReminders {
-        reminders.append(reminder)
-      }
+      reminders.append(contentsOf: Array(storedReminders))
     }
   }
 
@@ -68,7 +77,6 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource{
       DatabaseHelper.shared.deleteReminder(reminder: self.reminders[indexPath.row])
       self.reminders.remove(at: indexPath.row)
       self.reminderTableView.deleteRows(at: [indexPath], with: .fade)
-      self.reminderTableView.reloadData()
     })
     let configuration = UISwipeActionsConfiguration(actions: [delete])
     return configuration

@@ -21,8 +21,13 @@ class ReminderViewController: UIViewController{
     navigationController?.navigationBar.prefersLargeTitles = true
     reminderTableView.delegate = self
     reminderTableView.dataSource = self
+    reminderTableView.prefetchDataSource = self
+    let data = DatabaseHelper.shared.getStoredReminders().count
+    print("Total reminders are: \(data)")
+//    DatabaseHelper.shared.deleteAll()
     addDefaultReminders()
     reminderTableView.reloadData()
+
   }
 
 
@@ -43,7 +48,7 @@ class ReminderViewController: UIViewController{
           let rem = Reminder(title: value,dueDate: Date().addingTimeInterval( TimeInterval(Int(days)! * 24 * 60 * 60)))
           self.reminders.append(rem)
           DatabaseHelper.shared.saveReminder(reminder: rem)
-          self.reminderTableView.reloadData()
+          self.reminderTableView.insertRows(at: [IndexPath(row: self.reminders.count - 1, section: 0)], with: .fade)
         }
         else{print("Reminder not added")}
       }

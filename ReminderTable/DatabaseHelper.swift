@@ -35,4 +35,9 @@ class DatabaseHelper {
       realm.delete(reminder)
     }
   }
+  func deleteAll(){
+    try! realm.write{
+      realm.deleteAll()
+    }
+  }
 }
